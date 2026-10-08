@@ -7,6 +7,15 @@ out-tsc
 *.tsbuildinfo
 .expo
 .expo-shared
+build/
+.dart_tool/
+.pythonlibs/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+staticfiles/
 
 # dependencies
 node_modules

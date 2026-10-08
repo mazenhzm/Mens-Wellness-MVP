@@ -1,0 +1,2465 @@
+# MASTER MVP IMPLEMENTATION PROMPT
+
+## Men's Sexual Wellness Platform — MVP v1.0
+
+### ROLE
+
+You are a senior software architect, product engineer, security engineer, mobile engineer, backend engineer, QA engineer, and DevOps engineer working on a production-quality MVP.
+
+You are NOT allowed to behave like a generic code generator.
+
+You must first understand the product architecture, domain boundaries, security model, API contracts, and implementation constraints before writing code.
+
+Your objective is to build the **first production-ready MVP** of the Men's Sexual Wellness Platform described below.
+
+---
+
+# 1. PRIMARY OBJECTIVE
+
+Build a cross-platform mobile application for men's sexual wellness that runs from a **single mobile codebase** on:
+
+* Android
+* iOS
+
+The application must communicate with an independent backend API.
+
+The MVP must be architected so that:
+
+```text
+Flutter Mobile App
+        ↓
+HTTPS / REST / JSON
+        ↓
+Django REST API
+        ↓
+Domain/Application Services
+        ↓
+PostgreSQL
+        ↓
+Redis / Celery / Outbox
+        ↓
+AI Gateway / Object Storage / Payment Provider
+```
+
+The mobile application must NOT contain business-critical backend logic.
+
+The backend remains the authoritative source of:
+
+* authentication
+* authorization
+* user profile
+* assessment
+* wellness profile
+* program eligibility
+* personalization
+* personal plans
+* progress
+* AI safety
+* subscriptions
+* entitlements
+* community permissions
+* privacy operations
+
+---
+
+# 2. CRITICAL RULE — DO NOT HALLUCINATE PROJECT STATE
+
+Before implementing anything:
+
+1. Inspect the repository.
+2. Inspect all existing files.
+3. Inspect the existing database configuration.
+4. Inspect package/dependency manifests.
+5. Inspect environment configuration.
+6. Inspect migrations.
+7. Inspect existing API code.
+8. Inspect existing mobile code.
+9. Inspect tests.
+10. Inspect documentation.
+11. Determine what already exists.
+12. Determine what is missing.
+13. Determine what is partially implemented.
+14. Determine what is broken.
+
+Never claim that something exists unless you verified it.
+
+Never claim that a feature is implemented unless you verified the implementation.
+
+Never invent:
+
+* files
+* folders
+* database tables
+* API endpoints
+* environment variables
+* credentials
+* migrations
+* services
+* dependencies
+* integrations
+* tests
+* completed functionality
+
+If the repository contradicts this specification, **repository evidence takes precedence for existing implementation**, while this specification remains the target architecture.
+
+---
+
+# 3. MANDATORY PROJECT MEMORY SYSTEM
+
+Create and maintain:
+
+```text
+PROJECT_MEMORY.md
+```
+
+This file is mandatory.
+
+Its purpose is to prevent hallucination and preserve the project's actual state.
+
+The file must contain:
+
+## 3.1 Project Identity
+
+* Project name
+* Product purpose
+* MVP scope
+* Current implementation phase
+* Current version
+* Last verified date
+
+## 3.2 Verified Architecture
+
+Document the actual architecture after inspecting the repository.
+
+## 3.3 Technology Stack
+
+Record every technology actually used.
+
+Example:
+
+```text
+Mobile:
+Flutter
+Dart
+
+Backend:
+Python
+Django
+Django REST Framework
+
+Database:
+PostgreSQL
+pgvector
+
+Infrastructure:
+Redis
+Celery
+Object Storage
+
+AI:
+LLM Gateway
+RAG
+Embeddings
+
+Documentation:
+OpenAPI 3.1
+```
+
+Only mark a technology as implemented after verification.
+
+## 3.4 Repository Structure
+
+Document every important directory.
+
+## 3.5 Domain Ownership
+
+Document:
+
+* Identity
+* Assessment
+* Wellness
+* Content
+* Programs
+* Personalization
+* Plans
+* Tracking
+* Progress
+* AI
+* Community
+* Moderation
+* Billing
+* Notifications
+* Privacy
+* Analytics/Admin
+
+## 3.6 Database State
+
+Document:
+
+* tables
+* relationships
+* indexes
+* constraints
+* migrations
+* RLS policies
+* extensions
+
+## 3.7 API State
+
+Document:
+
+* implemented endpoints
+* pending endpoints
+* endpoint version
+* authentication mechanism
+* authorization requirements
+
+## 3.8 Mobile State
+
+Document:
+
+* implemented screens
+* navigation
+* state management
+* API client
+* authentication flow
+* local storage
+* secure storage
+* deep links
+* push notifications
+* Android configuration
+* iOS configuration
+
+## 3.9 Security State
+
+Document implemented:
+
+* authentication
+* authorization
+* RBAC
+* object-level authorization
+* RLS
+* CSRF
+* rate limiting
+* audit logs
+* secret management
+* sensitive-data handling
+
+## 3.10 Testing State
+
+Track:
+
+* unit tests
+* integration tests
+* API tests
+* mobile tests
+* E2E tests
+* security tests
+* AI safety tests
+
+## 3.11 Known Issues
+
+Maintain:
+
+```text
+Issue
+Severity
+Location
+Root Cause
+Status
+Resolution
+Verification
+```
+
+## 3.12 Decisions
+
+Maintain an Architecture Decision Record style section.
+
+Every important architectural decision must be recorded.
+
+---
+
+# 4. MANDATORY PROJECT REQUIREMENTS DOCUMENT
+
+Create:
+
+```text
+PROJECT_REQUIREMENTS.md
+```
+
+This file must document:
+
+* product requirements
+* functional requirements
+* non-functional requirements
+* security requirements
+* privacy requirements
+* mobile requirements
+* API requirements
+* AI requirements
+* billing requirements
+* community requirements
+* testing requirements
+* deployment requirements
+
+Every requirement must have:
+
+```text
+ID
+Description
+Priority
+Status
+Verification Method
+```
+
+Use:
+
+```text
+P0 = MVP critical
+P1 = early post-MVP
+P2 = later
+```
+
+---
+
+# 5. MANDATORY TECHNOLOGY / DEPENDENCY DOCUMENT
+
+Create:
+
+```text
+TECH_STACK.md
+```
+
+For every technology/dependency document:
+
+```text
+Name
+Version
+Purpose
+Where Used
+Why Selected
+Alternatives Considered
+Security Considerations
+License
+Required Configuration
+```
+
+Also create:
+
+```text
+DEPENDENCIES.md
+```
+
+with:
+
+* production dependencies
+* development dependencies
+* mobile dependencies
+* backend dependencies
+* infrastructure dependencies
+* optional dependencies
+
+Do not add a dependency unless it has a clear purpose.
+
+Avoid dependency bloat.
+
+Prefer stable, mature packages.
+
+---
+
+# 6. MANDATORY FILE RESPONSIBILITY DOCUMENTATION
+
+Create:
+
+```text
+PROJECT_FILES.md
+```
+
+This is one of the most important project documents.
+
+Every meaningful file created must be documented.
+
+For each file:
+
+```text
+File:
+Path:
+
+Purpose:
+What this file does.
+
+Domain:
+Which domain owns it.
+
+Dependencies:
+What it depends on.
+
+Consumers:
+What depends on it.
+
+Important Classes:
+...
+
+Important Functions:
+...
+
+Security Responsibility:
+...
+
+Data Responsibility:
+...
+
+Allowed Changes:
+...
+
+Forbidden Responsibilities:
+...
+
+Testing:
+...
+
+Status:
+PLANNED / IMPLEMENTED / VERIFIED / DEPRECATED
+```
+
+Do NOT document meaningless generated files individually.
+
+Document architecture-critical and business-critical files.
+
+---
+
+# 7. MOBILE TECHNOLOGY REQUIREMENT
+
+The mobile application MUST use:
+
+```text
+Flutter
+Dart
+```
+
+unless the repository already contains a technically justified cross-platform implementation that satisfies all requirements.
+
+The target platforms are:
+
+```text
+Android
+iOS
+```
+
+The architecture must support:
+
+```text
+One Codebase
+        ↓
+Flutter
+   ↙       ↘
+Android    iOS
+```
+
+Do not build separate Android and iOS applications.
+
+Do not duplicate business logic.
+
+Do not implement platform-specific logic unless genuinely required.
+
+Use platform abstraction when platform-specific capabilities are necessary.
+
+---
+
+# 8. MOBILE ARCHITECTURE
+
+Use a scalable feature-oriented architecture.
+
+Recommended structure:
+
+```text
+mobile/
+├── lib/
+│   ├── core/
+│   │   ├── config/
+│   │   ├── networking/
+│   │   ├── authentication/
+│   │   ├── security/
+│   │   ├── storage/
+│   │   ├── errors/
+│   │   ├── routing/
+│   │   ├── theme/
+│   │   └── utilities/
+│   │
+│   ├── features/
+│   │   ├── auth/
+│   │   ├── onboarding/
+│   │   ├── assessment/
+│   │   ├── wellness/
+│   │   ├── programs/
+│   │   ├── plan/
+│   │   ├── tracking/
+│   │   ├── progress/
+│   │   ├── coach/
+│   │   ├── community/
+│   │   ├── billing/
+│   │   ├── notifications/
+│   │   └── profile/
+│   │
+│   ├── shared/
+│   │   ├── widgets/
+│   │   ├── models/
+│   │   └── components/
+│   │
+│   └── main.dart
+│
+├── test/
+├── integration_test/
+├── android/
+└── ios/
+```
+
+Do not blindly create every directory.
+
+Create only directories required by actual implementation.
+
+---
+
+# 9. MOBILE UX PRINCIPLES
+
+The application must be:
+
+* mobile-first
+* private
+* discreet
+* calm
+* professional
+* accessible
+* responsive
+* simple
+* emotionally safe
+* non-judgmental
+
+Avoid:
+
+* pornographic presentation
+* explicit imagery
+* shame-based language
+* exaggerated promises
+* medical fear messaging
+* manipulative subscription UX
+
+---
+
+# 10. MVP MOBILE SCREENS
+
+Implement the following MVP flows.
+
+## Authentication
+
+```text
+Splash
+Login
+Register
+Email Verification
+Password Reset
+Session Restoration
+Logout
+```
+
+## Onboarding
+
+```text
+Welcome
+Consent
+Assessment Introduction
+Assessment
+Assessment Result
+Wellness Profile
+Personalized Plan
+```
+
+## Main App
+
+```text
+Home
+Today's Plan
+Task Details
+Check-in
+Progress
+AI Coach
+Programs
+Profile
+Settings
+```
+
+## Subscription
+
+```text
+Plans
+Plan Details
+Checkout
+Subscription Status
+Entitlements
+Restore/Refresh State
+```
+
+## Community
+
+If included in MVP scope:
+
+```text
+Community Feed
+Post Details
+Create Post
+Comments
+Report
+Anonymous Identity
+```
+
+Do not implement advanced community features unless explicitly required by the MVP scope.
+
+---
+
+# 11. MOBILE NAVIGATION
+
+Use a predictable navigation structure.
+
+Example:
+
+```text
+Bottom Navigation
+
+Home
+Plan
+Progress
+Coach
+Profile
+```
+
+Secondary flows use nested navigation.
+
+Authentication and onboarding remain outside the main authenticated navigation shell.
+
+---
+
+# 12. MOBILE AUTHENTICATION
+
+Authentication must use secure backend authentication.
+
+Do not store sensitive authentication material in plain local storage.
+
+Use secure platform storage:
+
+* Android Keystore-backed storage
+* iOS Keychain-backed storage
+
+The mobile client must implement:
+
+```text
+Login
+Session restoration
+Logout
+Session expiry
+Unauthorized response handling
+Re-authentication
+Password reset
+Email verification
+```
+
+Never place secrets directly inside the mobile application.
+
+---
+
+# 13. API CLIENT
+
+Create a centralized API client.
+
+Do not make arbitrary HTTP requests throughout UI widgets.
+
+Recommended separation:
+
+```text
+UI
+ ↓
+Feature Controller / State
+ ↓
+Repository
+ ↓
+API Client
+ ↓
+Django REST API
+```
+
+The API client must handle:
+
+* authentication
+* serialization
+* errors
+* timeout
+* retries where safe
+* request IDs
+* pagination
+* idempotency
+* network failure
+* 401/403
+* 429
+* 5xx
+
+Do not retry unsafe operations blindly.
+
+---
+
+# 14. BACKEND
+
+Use:
+
+```text
+Python
+Django
+Django REST Framework
+PostgreSQL
+Redis
+Celery
+```
+
+Use modular monolith architecture.
+
+Do NOT create microservices for the MVP.
+
+Backend domains:
+
+```text
+identity
+assessment
+wellness
+content
+programs
+personalization
+plans
+tracking
+progress
+ai
+community
+moderation
+billing
+notifications
+privacy
+analytics
+admin
+```
+
+---
+
+# 15. BACKEND ARCHITECTURE
+
+Use:
+
+```text
+View
+ ↓
+Serializer
+ ↓
+Application Service
+ ↓
+Domain Service
+ ↓
+Repository / ORM
+ ↓
+Database
+```
+
+Do not put business logic directly inside:
+
+* serializers
+* views
+* mobile code
+
+Business rules belong in domain/application services.
+
+---
+
+# 16. DATABASE
+
+Use PostgreSQL as the source of truth.
+
+Use:
+
+```text
+PostgreSQL
+pgvector
+```
+
+where required for AI retrieval.
+
+Sensitive domains require additional protection.
+
+Implement:
+
+* foreign keys
+* unique constraints
+* check constraints
+* indexes
+* transaction boundaries
+* appropriate cascading behavior
+* audit fields
+* soft deletion only where justified
+* RLS as defense-in-depth
+
+Never use RLS as a replacement for application authorization.
+
+---
+
+# 17. ASSESSMENT
+
+Implement:
+
+```text
+AssessmentVersion
+AssessmentQuestion
+AssessmentSession
+AssessmentResponse
+AssessmentResult
+```
+
+Every assessment session must reference the exact assessment version.
+
+Assessment results are:
+
+```text
+wellness signals
+```
+
+They are NOT:
+
+```text
+medical diagnoses
+```
+
+Never expose diagnosis-like conclusions.
+
+---
+
+# 18. WELLNESS PROFILE
+
+The wellness profile must contain structured information needed for personalization.
+
+Keep collection minimal.
+
+Do not collect sensitive information unless necessary for a specific product function.
+
+Separate:
+
+```text
+User Identity
+Wellness Profile
+Assessment Data
+Progress Data
+AI Conversations
+```
+
+Do not combine everything into a single user record.
+
+---
+
+# 19. PROGRAM SYSTEM
+
+Use:
+
+```text
+Program
+ProgramVersion
+ProgramModule
+ProgramWeek
+ProgramTask
+Exercise
+Habit
+Lesson
+```
+
+Program lifecycle:
+
+```text
+DRAFT
+↓
+IN_REVIEW
+↓
+APPROVED
+↓
+PUBLISHED
+↓
+ARCHIVED
+```
+
+Published program versions must be immutable.
+
+Changes require a new version.
+
+---
+
+# 20. PERSONALIZATION ENGINE
+
+Implement:
+
+```text
+PersonalizationEngine
+```
+
+with:
+
+```text
+EligibilityEngine
+PriorityEngine
+ScheduleEngine
+DifficultyEngine
+PlanComposer
+AdaptationEngine
+```
+
+Inputs:
+
+```text
+AssessmentResult
+WellnessProfile
+Preferences
+ProgramCatalog
+SafetyConstraints
+```
+
+Output:
+
+```text
+PersonalPlanDraft
+DecisionRecord
+```
+
+Personalization must be deterministic wherever possible.
+
+Store:
+
+```text
+rules_version
+engine_version
+input snapshot
+selected programs
+excluded programs
+priority decisions
+schedule
+difficulty
+```
+
+This is necessary for reproducibility.
+
+---
+
+# 21. AI MUST NOT CREATE MEDICAL TREATMENT
+
+This is a hard architectural rule.
+
+The LLM must NEVER independently invent a treatment plan.
+
+The AI can:
+
+* explain approved educational content
+* explain the user's existing plan
+* motivate adherence
+* answer wellness questions
+* summarize progress
+* help users reflect
+* suggest discussing concerns with a professional
+* propose non-medical plan adjustments for backend validation
+
+The AI cannot:
+
+* diagnose
+* prescribe
+* change medication dosage
+* guarantee outcomes
+* claim to cure disease
+* replace a healthcare professional
+* independently create medical treatment
+* directly mutate the user's plan/database
+
+---
+
+# 22. AI ARCHITECTURE
+
+Use:
+
+```text
+Mobile
+ ↓
+AI API
+ ↓
+Intent Classifier
+ ↓
+Safety Classifier
+ ↓
+Context Builder
+ ↓
+Approved Knowledge Retrieval
+ ↓
+Policy Builder
+ ↓
+LLM Gateway
+ ↓
+Output Validator
+ ↓
+Response
+```
+
+Use a provider-agnostic:
+
+```text
+LLMGateway
+```
+
+Do not tightly couple the domain to a single AI provider.
+
+---
+
+# 23. RAG
+
+The knowledge base must be curated.
+
+Pipeline:
+
+```text
+Approved Content
+ ↓
+Chunking
+ ↓
+Embeddings
+ ↓
+pgvector
+ ↓
+Metadata Filtering
+ ↓
+Top-K Retrieval
+ ↓
+LLM
+```
+
+Only retrieve approved content.
+
+Retrieval metadata should include:
+
+```text
+document_id
+chunk_id
+source
+version
+locale
+risk_level
+status
+```
+
+Never allow arbitrary community posts to become trusted AI knowledge automatically.
+
+---
+
+# 24. AI SAFETY
+
+Implement explicit risk classification:
+
+```text
+LOW
+MEDIUM
+HIGH
+EMERGENCY
+```
+
+High-risk interactions must follow predefined safety behavior.
+
+Do not allow the LLM to override safety policies.
+
+Log:
+
+```text
+risk level
+policy version
+model
+prompt version
+knowledge sources
+```
+
+Do NOT log raw sensitive sexual-health conversations in ordinary application logs.
+
+---
+
+# 25. PERSONALIZATION + AI BOUNDARY
+
+The AI may propose:
+
+```text
+"Consider reducing today's workload because adherence has been low."
+```
+
+But the AI must NOT directly modify the plan.
+
+Instead:
+
+```text
+AI Proposal
+ ↓
+Backend Validation
+ ↓
+Domain Rules
+ ↓
+Approved Adjustment
+ ↓
+Plan Adjustment
+```
+
+---
+
+# 26. DAILY PLAN
+
+The main product loop is:
+
+```text
+Discover
+ ↓
+Assess
+ ↓
+Personalize
+ ↓
+Act
+ ↓
+Check-in
+ ↓
+Track
+ ↓
+Adapt
+ ↓
+Improve
+ ↓
+Return
+```
+
+The Home screen should make today's action immediately understandable.
+
+The user should not need to navigate through multiple screens to understand:
+
+```text
+What should I do today?
+Why am I doing it?
+How long will it take?
+What happens after I complete it?
+```
+
+---
+
+# 27. TRACKING
+
+Implement:
+
+```text
+Task completion
+Habit completion
+Daily check-in
+Feedback
+Progress history
+```
+
+Use events such as:
+
+```text
+AssessmentCompleted
+PlanGenerated
+TaskCompleted
+CheckInCompleted
+PlanAdjusted
+```
+
+Use transactional outbox for reliable event publishing.
+
+---
+
+# 28. ADAPTATION
+
+Use product-defined rules.
+
+Example initial hypothesis:
+
+```text
+>80% adherence
+→ normal progression
+
+50–80%
+→ simplify
+
+<50%
+→ reduce load + ask barrier question
+```
+
+This is a PRODUCT HYPOTHESIS.
+
+Do not present it as clinically validated.
+
+Keep adaptation rules versioned.
+
+---
+
+# 29. COMMUNITY
+
+If included in MVP:
+
+Entities:
+
+```text
+Post
+Comment
+Reaction
+Report
+AnonymousIdentity
+ModerationDecision
+```
+
+Anonymous posting must preserve internal account linkage for:
+
+* moderation
+* abuse prevention
+* security
+* account management
+
+Public identity and internal identity must be separate.
+
+---
+
+# 30. CONTENT MODERATION
+
+Community content pipeline:
+
+```text
+Create
+ ↓
+Validation
+ ↓
+Spam Detection
+ ↓
+Safety Classification
+ ↓
+Medical Misinformation Detection
+ ↓
+Moderation Rules
+ ↓
+Publish / Review / Reject
+```
+
+Disallow:
+
+* pornography
+* sexual exploitation
+* harassment
+* scams
+* dangerous medical instructions
+* medication prescribing
+* dosage instructions
+* requests for genital image assessment
+* explicit sexual content where prohibited by product policy
+
+---
+
+# 31. BILLING
+
+Use provider abstraction.
+
+Entities:
+
+```text
+Product
+Price
+Subscription
+Payment
+Entitlement
+WebhookEvent
+```
+
+Entitlements are the application source of truth.
+
+Webhook handling must include:
+
+* signature verification
+* idempotency
+* replay protection
+* transaction safety
+* duplicate handling
+* out-of-order event handling
+* refund handling
+* cancellation
+* expiration
+* grace period
+
+Never trust the mobile client to declare itself premium.
+
+---
+
+# 32. PRIVACY
+
+Implement:
+
+```text
+Export My Data
+Delete My Account
+Consent Management
+Privacy Preferences
+```
+
+Deletion must be designed carefully around:
+
+* authentication
+* billing records
+* audit records
+* community moderation
+* legal retention
+* backups
+
+Never simply delete rows blindly.
+
+---
+
+# 33. SECURITY
+
+Security is a first-class requirement.
+
+Implement:
+
+```text
+Authentication
+Authorization
+RBAC
+Object-level authorization
+RLS defense-in-depth
+CSRF protection where applicable
+CORS allowlist
+Rate limiting
+Input validation
+Output validation
+Secure cookies where applicable
+Secure mobile storage
+Secret management
+Audit logs
+Request IDs
+Abuse prevention
+Upload validation
+Webhook verification
+```
+
+Roles:
+
+```text
+USER
+MODERATOR
+CONTENT_EDITOR
+CONTENT_REVIEWER
+ADMIN
+SUPER_ADMIN
+```
+
+Apply least privilege.
+
+---
+
+# 34. SENSITIVE DATA
+
+Treat these as highly sensitive:
+
+```text
+Assessment Responses
+Wellness Profile
+Progress
+AI Conversations
+AI Context
+Consent Records
+Anonymous Identity Mapping
+Privacy Requests
+Billing Information
+```
+
+Rules:
+
+* never expose through broad endpoints
+* never include in ordinary logs
+* never return unnecessary fields
+* never send unnecessary fields to LLM providers
+* enforce object-level authorization
+* minimize retention
+* encrypt appropriately
+* audit privileged access
+
+---
+
+# 35. MOBILE DATA PRIVACY
+
+Do not cache sensitive data unnecessarily.
+
+If local persistence is required:
+
+* use secure storage for secrets
+* encrypt sensitive local data where appropriate
+* define cache expiration
+* clear authenticated state on logout
+* prevent sensitive data from appearing in debug logs
+
+Do not expose sensitive information in:
+
+* push notification titles
+* lock-screen previews
+* analytics events
+* crash reports
+
+---
+
+# 36. NOTIFICATIONS
+
+Notifications must be discreet.
+
+Never put explicit sexual-health information in notification previews.
+
+Bad:
+
+```text
+"Your erectile dysfunction exercise is ready."
+```
+
+Prefer:
+
+```text
+"Your personalized plan is ready."
+```
+
+Notification content must respect user preferences.
+
+---
+
+# 37. ANALYTICS
+
+Analytics must avoid collecting unnecessary sensitive content.
+
+Never send raw:
+
+* assessment answers
+* AI conversations
+* private community content
+* sexual-health details
+
+Use safe events such as:
+
+```text
+assessment_started
+assessment_completed
+plan_created
+task_completed
+check_in_completed
+subscription_started
+subscription_cancelled
+```
+
+---
+
+# 38. OBSERVABILITY
+
+Backend logs must contain:
+
+```text
+request_id
+route
+method
+status
+latency
+safe user reference
+error code
+```
+
+Do not log:
+
+```text
+passwords
+tokens
+raw AI conversations
+assessment responses
+sensitive wellness information
+payment secrets
+```
+
+---
+
+# 39. TESTING
+
+Testing is mandatory.
+
+Implement:
+
+## Backend
+
+* unit tests
+* domain tests
+* service tests
+* API tests
+* authorization tests
+* RLS tests
+* idempotency tests
+* payment webhook tests
+* AI safety tests
+
+## Mobile
+
+* widget tests
+* unit tests
+* repository tests
+* navigation tests
+* authentication tests
+* critical-flow integration tests
+
+## E2E
+
+At minimum:
+
+```text
+Register
+ ↓
+Verify
+ ↓
+Login
+ ↓
+Consent
+ ↓
+Assessment
+ ↓
+Assessment Result
+ ↓
+Wellness Profile
+ ↓
+Generate Plan
+ ↓
+View Today's Plan
+ ↓
+Complete Task
+ ↓
+Check-in
+ ↓
+View Progress
+ ↓
+Use AI Coach
+```
+
+Also test:
+
+```text
+Unauthorized user
+Wrong owner
+Expired session
+Duplicate request
+Network failure
+Payment failure
+Subscription cancellation
+Account deletion
+```
+
+---
+
+# 40. GOLDEN PLAN TESTS
+
+Create deterministic test cases for the personalization engine.
+
+Given:
+
+```text
+same assessment
+same profile
+same rules version
+same program versions
+```
+
+the engine must produce the same plan.
+
+Store representative fixtures.
+
+Prevent accidental personalization regressions.
+
+---
+
+# 41. OPENAPI
+
+Create:
+
+```text
+docs/api/openapi.yaml
+```
+
+Use:
+
+```text
+OpenAPI 3.1
+```
+
+The API specification must reflect the real implementation.
+
+Do not create an imaginary API documentation file.
+
+CI should detect API/schema drift where practical.
+
+---
+
+# 42. ENVIRONMENT CONFIGURATION
+
+Create:
+
+```text
+.env.example
+```
+
+Never commit real secrets.
+
+Document variables such as:
+
+```text
+DATABASE_URL
+REDIS_URL
+SECRET_KEY
+ALLOWED_HOSTS
+CORS_ALLOWED_ORIGINS
+AI_PROVIDER
+AI_API_KEY
+OBJECT_STORAGE_ENDPOINT
+OBJECT_STORAGE_BUCKET
+OBJECT_STORAGE_ACCESS_KEY
+OBJECT_STORAGE_SECRET_KEY
+PAYMENT_PROVIDER
+PAYMENT_SECRET
+WEBHOOK_SECRET
+```
+
+Only include variables actually required by the implementation.
+
+---
+
+# 43. DEVELOPMENT ENVIRONMENT
+
+Provide reproducible local development.
+
+Use Docker where appropriate.
+
+Provide:
+
+```text
+docker-compose.yml
+```
+
+only if it materially simplifies development.
+
+Services may include:
+
+```text
+backend
+postgres
+redis
+worker
+```
+
+Do not containerize the mobile emulator itself unnecessarily.
+
+---
+
+# 44. MOBILE ENVIRONMENT
+
+Document:
+
+```text
+Flutter SDK version
+Dart version
+Android SDK requirements
+Xcode requirements
+iOS deployment target
+Android minimum SDK
+Android target SDK
+required environment variables
+development setup
+build commands
+test commands
+release commands
+```
+
+Create:
+
+```text
+docs/mobile/SETUP.md
+```
+
+---
+
+# 45. CROSS-PLATFORM VALIDATION
+
+The MVP is NOT considered complete unless the application is verified on:
+
+```text
+Android
+iOS
+```
+
+At minimum verify:
+
+* app startup
+* authentication
+* navigation
+* API connectivity
+* assessment
+* plan
+* task completion
+* check-in
+* progress
+* AI Coach
+* logout
+* error states
+
+Where physical iOS hardware is unavailable, use an iOS simulator and document the limitation.
+
+Where physical Android hardware is unavailable, use an Android emulator and document the limitation.
+
+Never claim physical-device verification if it was not performed.
+
+---
+
+# 46. ACCESSIBILITY
+
+Implement reasonable accessibility:
+
+* semantic labels
+* readable typography
+* touch target sizes
+* screen reader compatibility
+* keyboard/focus behavior where applicable
+* sufficient contrast
+* scalable text
+* clear validation errors
+
+---
+
+# 47. INTERNATIONALIZATION
+
+Design the application for localization from the beginning.
+
+At minimum architect for:
+
+```text
+English
+Arabic
+```
+
+Do not hardcode user-facing strings throughout widgets.
+
+Support RTL correctly for Arabic.
+
+Do not merely reverse individual text fields.
+
+Navigation/layout must support RTL.
+
+---
+
+# 48. ERROR HANDLING
+
+Every layer must have predictable error handling.
+
+Mobile should distinguish:
+
+```text
+Validation Error
+Authentication Error
+Authorization Error
+Network Error
+Rate Limit
+Server Error
+Unavailable Service
+Payment Error
+AI Safety Response
+```
+
+Backend must return standardized API errors:
+
+```json
+{
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable message",
+    "details": {},
+    "request_id": "uuid"
+  }
+}
+```
+
+---
+
+# 49. API CONTRACT
+
+Use the existing API Contract Specification v1.0 as the baseline.
+
+Core endpoints include:
+
+```text
+/auth/*
+/me
+/me/profile
+/me/consents
+/assessment/*
+/me/wellness
+/programs/*
+/me/recommended-programs
+/me/plan/*
+/me/check-ins
+/me/progress/*
+/me/coach/*
+/community/*
+/media/*
+/billing/*
+/webhooks/billing/*
+/notifications/*
+/me/privacy/*
+/admin/*
+```
+
+Do not invent alternative endpoint structures unless repository evidence requires reconciliation.
+
+---
+
+# 50. IDEMPOTENCY
+
+Idempotency is mandatory for operations such as:
+
+```text
+assessment completion
+plan generation
+task completion
+check-in submission
+subscription operations
+payment operations
+billing webhooks
+privacy requests
+media completion
+```
+
+Duplicate requests must not produce duplicate side effects.
+
+---
+
+# 51. TRANSACTIONAL OUTBOX
+
+Implement:
+
+```text
+OutboxEvent
+```
+
+with appropriate fields for:
+
+```text
+event_id
+event_type
+schema_version
+aggregate_type
+aggregate_id
+payload
+status
+attempts
+created_at
+processed_at
+```
+
+Use database transactions so that:
+
+```text
+Database change
++
+Outbox event
+```
+
+are committed atomically.
+
+Celery processes the outbox asynchronously.
+
+---
+
+# 52. FILE CREATION RULE
+
+Before creating a new file:
+
+1. Search for an existing equivalent.
+2. Determine whether the responsibility already exists.
+3. Prefer modifying an existing correct abstraction.
+4. Create a new file only when justified.
+5. Record the file in `PROJECT_FILES.md`.
+6. Update `PROJECT_MEMORY.md`.
+
+Never create duplicate:
+
+```text
+services
+repositories
+API clients
+models
+utilities
+authentication systems
+configuration systems
+```
+
+without a verified reason.
+
+---
+
+# 53. NO DUPLICATE BUSINESS LOGIC
+
+Business rules must have one authoritative implementation.
+
+For example:
+
+```text
+Personalization rules
+```
+
+must NOT be duplicated in:
+
+* Flutter
+* API views
+* serializers
+* frontend components
+* AI prompts
+
+The backend domain/application layer is authoritative.
+
+---
+
+# 54. AI IS NOT THE DATABASE
+
+Never use the LLM as:
+
+* database
+* source of truth
+* authorization system
+* business-rule engine
+* billing engine
+* personalization authority
+
+The LLM is an intelligence layer operating under deterministic system boundaries.
+
+---
+
+# 55. IMPLEMENTATION STRATEGY
+
+Do NOT attempt to generate the entire application blindly in one pass.
+
+Use controlled implementation phases.
+
+## PHASE 0 — REPOSITORY FORENSICS
+
+Inspect everything.
+
+Produce:
+
+```text
+PROJECT_MEMORY.md
+PROJECT_REQUIREMENTS.md
+TECH_STACK.md
+DEPENDENCIES.md
+PROJECT_FILES.md
+```
+
+Do not perform large feature implementation before this phase is complete.
+
+---
+
+## PHASE 1 — FOUNDATION
+
+Implement:
+
+```text
+repository structure
+environment configuration
+Docker development environment
+PostgreSQL
+Redis
+Django
+DRF
+Flutter
+API client
+authentication
+navigation
+logging
+error handling
+```
+
+Verify before continuing.
+
+---
+
+## PHASE 2 — IDENTITY + ONBOARDING
+
+Implement:
+
+```text
+registration
+login
+logout
+email verification
+password reset
+consent
+profile
+secure mobile session
+```
+
+Verify Android + iOS.
+
+---
+
+## PHASE 3 — ASSESSMENT
+
+Implement:
+
+```text
+assessment versioning
+questions
+sessions
+responses
+completion
+results
+```
+
+Add tests.
+
+---
+
+## PHASE 4 — WELLNESS + PROGRAMS
+
+Implement:
+
+```text
+wellness profile
+program catalog
+program versions
+program modules
+tasks
+approved educational content
+```
+
+---
+
+## PHASE 5 — PERSONALIZATION
+
+Implement:
+
+```text
+EligibilityEngine
+PriorityEngine
+ScheduleEngine
+DifficultyEngine
+PlanComposer
+AdaptationEngine
+```
+
+Add golden plan tests.
+
+---
+
+## PHASE 6 — DAILY PLAN + TRACKING
+
+Implement:
+
+```text
+personal plan
+today's plan
+task completion
+check-ins
+progress
+adaptation
+```
+
+---
+
+## PHASE 7 — AI COACH
+
+Implement:
+
+```text
+LLM Gateway
+intent classification
+safety classification
+context builder
+RAG
+output validation
+conversation persistence
+AI feedback
+AI usage tracking
+```
+
+AI must obey all safety boundaries.
+
+---
+
+## PHASE 8 — BILLING
+
+Implement:
+
+```text
+products
+prices
+checkout abstraction
+subscriptions
+payments
+entitlements
+webhooks
+```
+
+Use test/sandbox provider mode.
+
+---
+
+## PHASE 9 — COMMUNITY
+
+Only implement the MVP-level community functionality defined in scope.
+
+Implement:
+
+```text
+posts
+comments
+reactions
+anonymous identity
+reports
+moderation
+```
+
+---
+
+## PHASE 10 — PRIVACY + SECURITY HARDENING
+
+Implement and verify:
+
+```text
+authorization
+RLS
+rate limiting
+audit logging
+privacy export
+account deletion
+sensitive-data protection
+upload security
+webhook security
+AI safety
+```
+
+---
+
+## PHASE 11 — CROSS-PLATFORM QA
+
+Test:
+
+```text
+Android
+iOS
+```
+
+Perform complete critical-flow testing.
+
+---
+
+## PHASE 12 — RELEASE READINESS
+
+Produce:
+
+```text
+README.md
+PROJECT_MEMORY.md
+PROJECT_REQUIREMENTS.md
+TECH_STACK.md
+DEPENDENCIES.md
+PROJECT_FILES.md
+docs/mobile/SETUP.md
+docs/api/openapi.yaml
+docs/security/SECURITY.md
+docs/privacy/PRIVACY.md
+docs/deployment/DEPLOYMENT.md
+```
+
+Only create additional documentation when justified.
+
+---
+
+# 56. DEFINITION OF DONE
+
+The MVP is NOT complete because the code compiles.
+
+The MVP is complete only when:
+
+### Product
+
+* critical user journey works
+* onboarding works
+* assessment works
+* personalization works
+* plan works
+* daily tracking works
+* progress works
+* AI Coach works safely
+* subscription state works
+
+### Mobile
+
+* Android builds
+* iOS builds
+* authentication works
+* navigation works
+* API communication works
+* secure storage works
+* RTL architecture works
+* accessibility baseline works
+
+### Backend
+
+* API works
+* authorization works
+* object-level permissions work
+* database migrations work
+* background jobs work
+* outbox works
+* rate limits work
+* errors are standardized
+
+### Security
+
+* no secrets committed
+* sensitive data is protected
+* unauthorized access is rejected
+* wrong-owner access is rejected
+* AI cannot bypass permissions
+* payment webhooks are verified
+* uploads are validated
+
+### AI
+
+* approved knowledge is used
+* retrieval is traceable
+* safety policies work
+* high-risk behavior is controlled
+* AI cannot mutate plans directly
+* AI cannot diagnose/prescribe
+
+### Documentation
+
+All required project memory and architecture files exist and accurately describe the implementation.
+
+---
+
+# 57. VERIFICATION PROTOCOL
+
+After each phase:
+
+1. Run tests.
+2. Run static analysis.
+3. Run formatting/linting.
+4. Run type checks.
+5. Run migrations checks.
+6. Run API checks.
+7. Verify security boundaries.
+8. Verify mobile build.
+9. Update project memory.
+10. Update project file documentation.
+11. Record known issues.
+
+Do not proceed if a critical regression exists.
+
+---
+
+# 58. FINAL AUDIT
+
+Before declaring completion, perform a final audit.
+
+Check:
+
+```text
+Architecture
+Database
+API
+Authentication
+Authorization
+RLS
+Mobile
+Android
+iOS
+Assessment
+Personalization
+Plans
+Tracking
+Progress
+AI
+RAG
+Safety
+Community
+Billing
+Privacy
+Notifications
+Testing
+Documentation
+Deployment
+```
+
+For every item report:
+
+```text
+PASS
+PARTIAL
+FAIL
+NOT IMPLEMENTED
+```
+
+Never report PASS without evidence.
+
+---
+
+# 59. FINAL IMPLEMENTATION REPORT
+
+At the end produce:
+
+```text
+MVP_IMPLEMENTATION_REPORT.md
+```
+
+Containing:
+
+## Executive Summary
+
+## Implemented Features
+
+## Mobile Status
+
+```text
+Android: PASS/PARTIAL/FAIL
+iOS: PASS/PARTIAL/FAIL
+```
+
+## Backend Status
+
+## Database Status
+
+## API Status
+
+## Security Status
+
+## AI Safety Status
+
+## Billing Status
+
+## Testing Status
+
+## Documentation Status
+
+## Known Limitations
+
+## Remaining P0 Issues
+
+## Remaining P1 Issues
+
+## Deployment Requirements
+
+## Exact Commands Used
+
+## Verified Environment
+
+## Final Repository Structure
+
+---
+
+# 60. MOST IMPORTANT ENGINEERING RULES
+
+Always follow these rules:
+
+1. Inspect before modifying.
+2. Verify before claiming.
+3. Do not hallucinate project state.
+4. Do not duplicate architecture.
+5. Do not duplicate business logic.
+6. Backend is the source of truth.
+7. PostgreSQL is the data source of truth.
+8. Entitlements are the subscription source of truth.
+9. Approved content is the AI knowledge source of truth.
+10. AI is not the business-rule engine.
+11. AI cannot directly mutate critical domain state.
+12. Never trust the mobile client for authorization.
+13. Never trust the client for subscription status.
+14. Never expose sensitive data unnecessarily.
+15. Never log sensitive sexual-health information.
+16. Never commit secrets.
+17. Use least privilege.
+18. Use object-level authorization.
+19. Use RLS as defense-in-depth.
+20. Make side effects idempotent.
+21. Use transactional outbox for domain events.
+22. Version important business rules.
+23. Version assessments.
+24. Version programs.
+25. Version AI prompts and safety policies.
+26. Keep APIs versioned.
+27. Keep OpenAPI synchronized with implementation.
+28. Test Android and iOS separately.
+29. Support Arabic RTL correctly.
+30. Never claim verification that did not actually happen.
+
+---
+
+# 61. START NOW
+
+Start with:
+
+```text
+PHASE 0 — REPOSITORY FORENSICS
+```
+
+Do NOT immediately generate large amounts of application code.
+
+First inspect the repository and produce an evidence-based implementation assessment.
+
+Then create/update:
+
+```text
+PROJECT_MEMORY.md
+PROJECT_REQUIREMENTS.md
+TECH_STACK.md
+DEPENDENCIES.md
+PROJECT_FILES.md
+```
+
+After Phase 0, provide a concise report containing:
+
+```text
+1. Current repository state
+2. Existing architecture
+3. Existing technologies
+4. Existing files relevant to MVP
+5. Existing database state
+6. Existing API state
+7. Existing mobile state
+8. Missing components
+9. Conflicts with this specification
+10. Recommended implementation order
+11. Risks
+12. Verification evidence
+```
+
+Then proceed phase-by-phase.
+
+Do not skip verification.
+
+Do not silently change architectural decisions.
+
+If an architectural decision must change, record:
+
+```text
+OLD DECISION
+NEW DECISION
+REASON
+IMPACT
+MIGRATION PLAN
+```
+
+in:
+
+```text
+PROJECT_MEMORY.md
+```
+
+The final goal is not merely to produce code.
+
+The goal is to produce a **maintainable, secure, documented, testable, cross-platform MVP that can evolve into the production product without requiring an architectural rewrite.**
