@@ -132,8 +132,18 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_ACKS_LATE = True
 CELERY_TASK_REJECT_ON_WORKER_LOST = True
 
+CLERK_SECRET_KEY = os.environ.get("CLERK_SECRET_KEY", "").strip()
+CLERK_JWT_KEY = os.environ.get("CLERK_JWT_KEY") or None
+CLERK_AUTHORIZED_PARTIES = [
+    party.strip()
+    for party in os.environ.get("CLERK_AUTHORIZED_PARTIES", "").split(",")
+    if party.strip()
+]
+
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "apps.core.authentication.ClerkBearerAuthentication"
+    ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",

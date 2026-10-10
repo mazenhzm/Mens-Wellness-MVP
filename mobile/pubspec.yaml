@@ -40,6 +40,8 @@ dependencies:
   dio: ^5.11.1
   flutter_localizations:
     sdk: flutter
+  flutter_secure_storage: ^10.3.4
+  clerk_auth: ^0.0.18-beta
 
 dev_dependencies:
   flutter_test:

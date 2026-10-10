@@ -18,10 +18,11 @@ from django.urls import path
 from rest_framework.permissions import AllowAny
 from drf_spectacular.views import SpectacularAPIView
 
-from apps.core.views import HealthView
+from apps.core.views import HealthView, SessionView
 
 urlpatterns = [
     path("api/healthz", HealthView.as_view(), name="healthz"),
+    path("api/v1/session", SessionView.as_view(), name="api-session"),
     path(
         "api/v1/schema/",
         SpectacularAPIView.as_view(authentication_classes=[], permission_classes=[AllowAny]),
